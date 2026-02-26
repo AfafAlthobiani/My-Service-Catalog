@@ -7,30 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Backgrounds — very dark purple-tinted */
   --bg:  #0C0B10;
   --bg2: #13111A;
   --bg3: #1B1825;
-
-  /* Border */
   --border: rgba(126,104,171,0.12);
-
-  /* Primary purple palette from #7e68ab */
-  --pur:      #7e68ab;   /* base */
-  --pur-light:#A990D4;   /* lighter tint */
-  --pur-pale: #C4B3E3;   /* very light */
-  --pur-deep: #5A4880;   /* darker shade */
+  --pur:      #7e68ab;
+  --pur-light:#A990D4;
+  --pur-pale: #C4B3E3;
+  --pur-deep: #5A4880;
   --pur-dim:  rgba(126,104,171,0.12);
-
-  /* Accent — soft rose that pairs with purple */
   --accent:   #C97FB5;
   --accent2:  #E4A5D0;
-
-  /* WhatsApp stays green */
   --green:    #2ECC71;
   --green-dim:rgba(46,204,113,0.1);
-
-  /* Text */
   --text:  #EDE9F5;
   --muted: #7A718E;
 }
@@ -184,68 +173,225 @@ body::after {
   background:var(--border);
 }
 
-/* PKG CARDS */
-.pkg-card {
+/* SERVICE DETAIL CARDS */
+.svc-detail-card {
   background:var(--bg2);
   border:1px solid var(--border);
-  border-radius:16px;
+  border-radius:20px;
   overflow:hidden;
-  margin-bottom:14px;
+  margin-bottom:20px;
   position:relative;
   transition:border-color .25s,transform .25s;
   animation:fadeUp .6s ease forwards;
   opacity:0;
 }
-.pkg-card:nth-child(1){animation-delay:.1s;}
-.pkg-card:nth-child(2){animation-delay:.2s;}
-.pkg-card:nth-child(3){animation-delay:.3s;}
-.pkg-card:hover { border-color:rgba(126,104,171,0.45); transform:translateY(-3px); }
-.pkg-card.featured {
-  border-color:rgba(126,104,171,0.25);
+.svc-detail-card:nth-child(1){animation-delay:.1s;}
+.svc-detail-card:nth-child(2){animation-delay:.2s;}
+.svc-detail-card:nth-child(3){animation-delay:.3s;}
+.svc-detail-card:hover { border-color:rgba(126,104,171,0.45); transform:translateY(-3px); }
+.svc-detail-card.featured {
+  border-color:rgba(201,127,181,0.3);
   background:linear-gradient(145deg,#17122A,var(--bg2));
 }
-.pkg-ribbon {
-  position:absolute;
-  top:14px;
-  left:14px;
-  background:var(--pur);
-  color:#fff;
-  font-size:10px;
-  font-weight:700;
-  padding:3px 10px;
-  border-radius:99px;
-}
-.pkg-stripe {
+
+.svc-stripe {
   height:4px;
   background:linear-gradient(90deg,var(--pur-deep),var(--pur),var(--pur-light),var(--accent),var(--pur));
   background-size:300%;
   animation:shimmer 4s linear infinite;
 }
+.svc-stripe.accent-stripe {
+  background:linear-gradient(90deg,var(--pur-deep),var(--accent),var(--accent2),var(--pur-light),var(--accent));
+  background-size:300%;
+}
+
 @keyframes shimmer { 0%{background-position:300% center} 100%{background-position:-300% center} }
 
-.pkg-body { padding:20px 20px 0; }
-.pkg-num { font-size:10px; letter-spacing:2px; color:var(--muted); font-weight:600; margin-bottom:6px; display:block; }
-.pkg-name { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--text); margin-bottom:8px; line-height:1.2; }
-.pkg-desc { font-size:13px; color:var(--muted); line-height:1.85; margin-bottom:14px; }
-.pkg-result {
+.svc-detail-header {
+  padding:22px 22px 0;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+.svc-detail-icon-wrap {
+  width:52px;
+  height:52px;
+  border-radius:14px;
+  background:var(--pur-dim);
+  border:1px solid rgba(126,104,171,0.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  flex-shrink:0;
+}
+.svc-detail-icon-wrap.accent-icon {
+  background:rgba(201,127,181,0.1);
+  border-color:rgba(201,127,181,0.25);
+}
+.svc-detail-badge {
+  background:var(--pur-dim);
+  border:1px solid rgba(126,104,171,0.3);
+  color:var(--pur-light);
+  font-size:10px;
+  font-weight:700;
+  padding:4px 10px;
+  border-radius:99px;
+  white-space:nowrap;
+}
+.svc-detail-badge.hot {
+  background:rgba(201,127,181,0.12);
+  border-color:rgba(201,127,181,0.3);
+  color:var(--accent2);
+}
+
+.svc-detail-body { padding:14px 22px 0; }
+.svc-detail-num { font-size:10px; letter-spacing:2px; color:var(--muted); font-weight:600; margin-bottom:5px; display:block; }
+.svc-detail-name {
+  font-family:'Syne',sans-serif;
+  font-size:20px;
+  font-weight:800;
+  color:var(--text);
+  margin-bottom:10px;
+  line-height:1.2;
+}
+.svc-detail-desc {
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.9;
+  margin-bottom:16px;
+}
+
+/* INCLUDES LIST */
+.includes-label {
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:var(--pur-light);
+  font-weight:700;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.includes-label::after {
+  content:'';
+  flex:1;
+  height:1px;
+  background:rgba(126,104,171,0.15);
+}
+.includes-list {
+  list-style:none;
+  margin-bottom:16px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.includes-list li {
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  font-size:12.5px;
+  color:var(--text);
+  opacity:.85;
+  line-height:1.5;
+}
+.includes-list li::before {
+  content:'✦';
+  color:var(--pur-light);
+  font-size:9px;
+  flex-shrink:0;
+  margin-top:3px;
+}
+.includes-list.accent-list li::before { color:var(--accent); }
+
+/* RESULT BOX */
+.svc-result {
   background:var(--pur-dim);
   border-right:3px solid var(--pur);
-  padding:10px 12px;
+  padding:11px 13px;
   border-radius:0 8px 8px 0;
   margin-bottom:18px;
 }
-.pkg-result-label { font-size:10px; letter-spacing:1px; color:var(--pur-light); font-weight:600; display:block; margin-bottom:3px; }
-.pkg-result p { font-size:13px; color:var(--pur-pale); line-height:1.6; }
-.pkg-footer {
+.svc-result.accent-result {
+  background:rgba(201,127,181,0.08);
+  border-right-color:var(--accent);
+}
+.svc-result-label {
+  font-size:10px;
+  letter-spacing:1px;
+  color:var(--pur-light);
+  font-weight:600;
+  display:block;
+  margin-bottom:3px;
+}
+.svc-result.accent-result .svc-result-label { color:var(--accent2); }
+.svc-result p { font-size:12.5px; color:var(--pur-pale); line-height:1.6; }
+.svc-result.accent-result p { color:var(--accent2); opacity:.9; }
+
+/* SUITABLE FOR */
+.suitable-label {
+  font-size:10px;
+  color:var(--muted);
+  margin-bottom:6px;
+  font-weight:600;
+  letter-spacing:.5px;
+}
+.suitable-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:18px;
+}
+.suitable-tag {
+  background:rgba(126,104,171,0.07);
+  border:1px solid rgba(126,104,171,0.15);
+  color:var(--muted);
+  font-size:10.5px;
+  padding:4px 10px;
+  border-radius:99px;
+}
+
+/* FOOTER */
+.svc-detail-footer {
   display:flex;
   align-items:center;
   justify-content:space-between;
   border-top:1px solid var(--border);
-  padding:14px 20px;
+  padding:14px 22px;
+  gap:12px;
 }
-.pkg-price-label { font-size:10px; color:var(--muted); margin-bottom:2px; }
-.pkg-price-val { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--pur-light); }
-.pkg-price-val em { font-size:13px; font-style:normal; color:var(--muted); font-weight:400; margin-left:3px; }
+.price-block {}
+.price-label { font-size:10px; color:var(--muted); margin-bottom:2px; }
+.price-val {
+  font-family:'Syne',sans-serif;
+  font-size:22px;
+  font-weight:800;
+  color:var(--pur-light);
+  line-height:1;
+}
+.price-val em { font-size:13px; font-style:normal; color:var(--muted); font-weight:400; margin-right:3px; }
+.price-tiers {
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+.price-tier {
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.price-tier-name {
+  font-size:10px;
+  color:var(--muted);
+  min-width:50px;
+}
+.price-tier-val {
+  font-family:'Syne',sans-serif;
+  font-size:13px;
+  font-weight:800;
+  color:var(--pur-light);
+}
 
 /* WA BUTTON */
 .wa-btn {
@@ -255,99 +401,32 @@ body::after {
   background:linear-gradient(135deg,#25D366,#128C7E);
   color:white;
   text-decoration:none;
-  padding:11px 20px;
+  padding:11px 18px;
   border-radius:10px;
   font-size:13px;
   font-weight:700;
   transition:opacity .2s,transform .2s;
   white-space:nowrap;
+  flex-shrink:0;
 }
 .wa-btn:hover { opacity:.9; transform:scale(1.02); }
 .wa-icon { width:18px; height:18px; fill:white; flex-shrink:0; }
 
-/* SERVICES GRID */
-.services-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:10px;
-}
-.svc-card {
-  background:var(--bg2);
+/* DIVIDER PACKAGES SECTION */
+.pkg-intro {
+  background:var(--bg3);
   border:1px solid var(--border);
   border-radius:14px;
-  overflow:hidden;
-  position:relative;
-  transition:border-color .2s,transform .2s;
-  animation:fadeUp .6s ease forwards;
-  opacity:0;
+  padding:16px 18px;
+  margin-bottom:20px;
   display:flex;
-  flex-direction:column;
-}
-.svc-card:hover { border-color:rgba(126,104,171,0.4); transform:translateY(-2px); }
-.svc-img {
-  width:100%;
-  aspect-ratio:4/3;
-  background:var(--bg3);
-  display:flex;
-  flex-direction:column;
   align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:hidden;
+  gap:14px;
 }
-.svc-img::before {
-  content:'';
-  position:absolute;
-  inset:0;
-  background-image:
-    repeating-linear-gradient(0deg,transparent,transparent 20px,rgba(126,104,171,0.04) 20px,rgba(126,104,171,0.04) 21px),
-    repeating-linear-gradient(90deg,transparent,transparent 20px,rgba(126,104,171,0.04) 20px,rgba(126,104,171,0.04) 21px);
-}
-.svc-img-icon { font-size:28px; margin-bottom:5px; position:relative; z-index:1; }
-.svc-img-tag {
-  font-size:9px;
-  color:var(--muted);
-  letter-spacing:1px;
-  text-align:center;
-  position:relative;
-  z-index:1;
-  border:1px dashed rgba(126,104,171,0.2);
-  padding:3px 8px;
-  border-radius:4px;
-}
-.svc-body { padding:11px; flex:1; display:flex; flex-direction:column; }
-.svc-name { font-size:12px; font-weight:700; color:var(--text); line-height:1.35; margin-bottom:4px; }
-.svc-desc { font-size:10.5px; color:var(--muted); line-height:1.6; flex:1; margin-bottom:7px; }
-.svc-meta { display:flex; align-items:center; justify-content:space-between; }
-.svc-time { font-size:10px; color:var(--muted); }
-.svc-price { font-family:'Syne',sans-serif; font-size:12px; font-weight:800; color:var(--pur-light); }
-.svc-wa-btn {
-  display:block;
-  width:100%;
-  background:var(--green-dim);
-  border-top:1px solid rgba(46,204,113,0.15);
-  color:var(--green);
-  font-size:11px;
-  font-weight:700;
-  text-align:center;
-  padding:9px;
-  text-decoration:none;
-  transition:background .2s;
-  letter-spacing:.3px;
-}
-.svc-wa-btn:hover { background:rgba(46,204,113,0.18); }
-
-/* animate service cards */
-.svc-card:nth-child(1){animation-delay:.05s;} .svc-card:nth-child(2){animation-delay:.1s;}
-.svc-card:nth-child(3){animation-delay:.15s;} .svc-card:nth-child(4){animation-delay:.2s;}
-.svc-card:nth-child(5){animation-delay:.25s;} .svc-card:nth-child(6){animation-delay:.3s;}
-.svc-card:nth-child(7){animation-delay:.35s;} .svc-card:nth-child(8){animation-delay:.4s;}
-.svc-card:nth-child(9){animation-delay:.45s;} .svc-card:nth-child(10){animation-delay:.5s;}
-.svc-card:nth-child(11){animation-delay:.55s;} .svc-card:nth-child(12){animation-delay:.6s;}
-.svc-card:nth-child(13){animation-delay:.65s;} .svc-card:nth-child(14){animation-delay:.7s;}
-.svc-card:nth-child(15){animation-delay:.75s;} .svc-card:nth-child(16){animation-delay:.8s;}
-.svc-card:nth-child(17){animation-delay:.85s;} .svc-card:nth-child(18){animation-delay:.9s;}
+.pkg-intro-icon { font-size:28px; flex-shrink:0; }
+.pkg-intro-text {}
+.pkg-intro-title { font-size:14px; font-weight:700; color:var(--text); margin-bottom:3px; }
+.pkg-intro-desc { font-size:12px; color:var(--muted); line-height:1.6; }
 
 /* CTA */
 .cta-section {
@@ -403,293 +482,243 @@ footer {
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <div class="topbar-logo">Afaf Saud </div>
+    <div class="topbar-logo">Afaf Saud</div>
     <div class="topbar-pill">🇸🇦 خدمات رقمية</div>
   </div>
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-tag">عفاف ستوديو</div>
+    <div class="hero-tag">عفاف سعود</div>
     <h1 class="hero-title">براندك<br><span>يبدأ من هنا ✦</span></h1>
-    <p class="hero-sub">تسويق، تصميم، ومتاجر إلكترونية — كل اللي تحتاجه لمشروعك في مكان واحد 🚀</p>
+    <p class="hero-sub">متاجر احترافية، هويات بصرية، وتحسين تحويل — كل اللي يحتاجه مشروعك للنجاح الرقمي 🚀</p>
     <div class="hero-stats">
-      <div class="stat"><span class="stat-num">18+</span><span class="stat-label">خدمة</span></div>
-      <div class="stat"><span class="stat-num">3</span><span class="stat-label">باقات</span></div>
-      <div class="stat"><span class="stat-num">24-</span><span class="stat-label">تسليم سريع</span></div>
-      <div class="stat"><span class="stat-num">50+</span><span class="stat-label">
-الطلبات المكتملة</span></div>
-
+      <div class="stat"><span class="stat-num">3</span><span class="stat-label">خدمات</span></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">نتائج فعلية</span></div>
+      <div class="stat"><span class="stat-num">5★</span><span class="stat-label">تقييم</span></div>
+      <div class="stat"><span class="stat-num">50+</span><span class="stat-label">مشروع مكتمل</span></div>
     </div>
   </div>
 
-  <!-- PACKAGES -->
+  <!-- SERVICES SECTION -->
   <div class="section-header">
     <div class="section-dot"></div>
-    <div class="section-title">الباقات المتكاملة</div>
+    <div class="section-title">خدماتنا المتخصصة</div>
     <div class="section-line"></div>
   </div>
 
-  <div class="pkg-card">
-    <div class="pkg-stripe"></div>
-    <div class="pkg-body">
-      <span class="pkg-num">PACKAGE · 01</span>
-      <div class="pkg-name">🌱 انطلاقة البراند</div>
-      <p class="pkg-desc">نبنيلك هوية تجارية قوية من الصفر — رسالتك، شخصيتك، وشكلك البصري. مشروعك يستحق وجه احترافي يتكلم عنك.</p>
-      <div class="pkg-result">
-        <span class="pkg-result-label">النتيجة</span>
-        <p>براند يلفت الأنظار ويخلي عميلك يثق فيك من أول نظرة ✨</p>
+  <!-- SERVICE 1: متجر احترافي -->
+  <div class="svc-detail-card">
+    <div class="svc-stripe"></div>
+    <div class="svc-detail-header">
+      <div class="svc-detail-icon-wrap">🛒</div>
+      <div class="svc-detail-badge">⏱ التسليم 7-10 أيام</div>
+    </div>
+    <div class="svc-detail-body">
+      <span class="svc-detail-num">SERVICE · 01</span>
+      <div class="svc-detail-name">بناء متجر احترافي<br>جاهز للبيع</div>
+      <p class="svc-detail-desc">
+        هل ترغب بإطلاق متجر إلكتروني احترافي يحقق مبيعات فعلية وليس مجرد تصميم جميل؟ نبني لك متجراً متكاملاً على سلة، زد، أو Shopify — بمنهجية مدروسة تركّز على تجربة العميل وتحفيز الشراء.
+      </p>
+
+      <div class="includes-label">ماذا تشمل الخدمة</div>
+      <ul class="includes-list">
+        <li>تصميم متجر احترافي متوافق مع هوية علامتك</li>
+        <li>إعداد الصفحات الأساسية (رئيسية – من نحن – السياسات – تواصل)</li>
+        <li>رفع المنتجات بصياغة تسويقية مهيأة للتحويل</li>
+        <li>تحسين تجربة المستخدم ومسار الشراء</li>
+        <li>ربط بوابات الدفع وخيارات الشحن</li>
+        <li>إعداد السلة المهجورة والإشعارات الأساسية</li>
+        <li>تهيئة أساسية لمحركات البحث SEO</li>
+        <li>اختبار المتجر الكامل قبل الإطلاق</li>
+      </ul>
+
+      <div class="svc-result">
+        <span class="svc-result-label">النتيجة</span>
+        <p>متجر جاهز للبيع يعمل بكفاءة ويمنح عملاءك تجربة شراء احترافية من أول يوم ✨</p>
+      </div>
+
+      <div class="suitable-label">SUITABLE FOR</div>
+      <div class="suitable-tags">
+        <span class="suitable-tag">رواد الأعمال الجادين</span>
+        <span class="suitable-tag">المتاجر الناشئة</span>
+        <span class="suitable-tag">إعادة إطلاق أقوى</span>
       </div>
     </div>
-    <div class="pkg-footer">
-      <div><div class="pkg-price-label">يبدأ من</div><div class="pkg-price-val">2,500 <em>ريال</em></div></div>
-      <a href="https://wa.me/966592843956?text=وناسة! أبي أعرف أكثر عن باقة انطلاقة البراند 🌱" class="wa-btn" target="_blank">
+    <div class="svc-detail-footer">
+      <div>
+        <div class="price-label">يبدأ من</div>
+        <div class="price-val">1,800 <em>ريال</em></div>
+      </div>
+      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة بناء متجر احترافي 🛒" class="wa-btn" target="_blank">
         <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        اختر الباقة
+        اطلب الآن
       </a>
     </div>
   </div>
 
-  <div class="pkg-card">
-    <div class="pkg-stripe"></div>
-    <div class="pkg-body">
-      <span class="pkg-num">PACKAGE · 02</span>
-      <div class="pkg-name">🛍️ البراند + المتجر الرقمي</div>
-      <p class="pkg-desc">هويتك + متجرك الإلكتروني بخطوة وحدة. كل شي جاهز للبيع الفوري بتجربة مستخدم ما تعيق أي عميل.</p>
-      <div class="pkg-result">
-        <span class="pkg-result-label">النتيجة</span>
-        <p>متجر رهيب بهوية متكاملة — الزائر يتحول لمشترٍ من أول دخلة 🎯</p>
+  <!-- SERVICE 2: CRO -->
+  <div class="svc-detail-card featured">
+    <div class="svc-stripe accent-stripe"></div>
+    <div class="svc-detail-header">
+      <div class="svc-detail-icon-wrap accent-icon">📈</div>
+      <div class="svc-detail-badge hot">🔥 الأكثر طلباً</div>
+    </div>
+    <div class="svc-detail-body">
+      <span class="svc-detail-num">SERVICE · 02</span>
+      <div class="svc-detail-name">تحسين معدل التحويل<br>للمتاجر القائمة</div>
+      <p class="svc-detail-desc">
+        لديك متجر قائم لكن المبيعات أقل من المتوقع؟ المشكلة في الغالب ليست في المنتج، بل في تجربة العميل ومسار الشراء. نحلل ونحسّن معدل التحويل لمتجرك بهدف زيادة الطلبات دون الحاجة لرفع ميزانية الإعلانات.
+      </p>
+
+      <div class="includes-label">ماذا تشمل الخدمة</div>
+      <ul class="includes-list accent-list">
+        <li>تحليل شامل لتجربة المستخدم داخل المتجر</li>
+        <li>مراجعة صفحة المنتج والعناوين وأزرار الشراء</li>
+        <li>تحسين عرض القيمة والعروض التحفيزية</li>
+        <li>دراسة سلوك العميل واقتراح نقاط تطوير عملية</li>
+        <li>تحسين ترتيب العناصر لرفع معدل الإكمال</li>
+        <li>تقرير احترافي يتضمن خطة تطوير واضحة</li>
+        <li>تنفيذ التعديلات الأساسية داخل المتجر</li>
+      </ul>
+
+      <div class="svc-result accent-result">
+        <span class="svc-result-label">النتيجة</span>
+        <p>رفع معدل التحويل وتحقيق مبيعات أعلى من نفس عدد الزوار الحاليين 🎯</p>
+      </div>
+
+      <div class="suitable-label">SUITABLE FOR</div>
+      <div class="suitable-tags">
+        <span class="suitable-tag">متاجر بزيارات منخفضة التحويل</span>
+        <span class="suitable-tag">تحسين الأداء</span>
+        <span class="suitable-tag">تقليل التكاليف الإعلانية</span>
       </div>
     </div>
-    <div class="pkg-footer">
-      <div><div class="pkg-price-label">يبدأ من</div><div class="pkg-price-val">4,500 <em>ريال</em></div></div>
-      <a href="https://wa.me/966592843956?text=وناسة! أبي أعرف أكثر عن باقة البراند والمتجر 🛍️" class="wa-btn" target="_blank">
+    <div class="svc-detail-footer">
+      <div>
+        <div class="price-label">يبدأ من</div>
+        <div class="price-val">1,200 <em>ريال</em></div>
+      </div>
+      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة تحسين معدل التحويل CRO 📈" class="wa-btn" target="_blank">
         <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        اختر الباقة
+        اطلب الآن
       </a>
     </div>
   </div>
 
-  <div class="pkg-card featured">
-    <div class="pkg-stripe"></div>
-    <div class="pkg-ribbon">⭐ الأكثر طلباً</div>
-    <div class="pkg-body" style="padding-top:38px">
-      <span class="pkg-num">PACKAGE · 03</span>
-      <div class="pkg-name">🚀 الإطلاق الكامل للنمو</div>
-      <p class="pkg-desc">الحزمة الفل — هوية + متجر + محتوى + خطة نمو + متابعة استشارية. الخيار اللي يعطيك انطلاقة ما تتوقع حجمها.</p>
-      <div class="pkg-result">
-        <span class="pkg-result-label">النتيجة</span>
-        <p>إطلاق متكامل يضاعف فرص نجاحك الرقمي من أول يوم 🔥</p>
+  <!-- SERVICE 3: Brand Identity -->
+  <div class="svc-detail-card">
+    <div class="svc-stripe"></div>
+    <div class="svc-detail-header">
+      <div class="svc-detail-icon-wrap">✨</div>
+      <div class="svc-detail-badge">⏱ التسليم 10-14 يوم</div>
+    </div>
+    <div class="svc-detail-body">
+      <span class="svc-detail-num">SERVICE · 03</span>
+      <div class="svc-detail-name">باقة الهوية البصرية<br>والاستراتيجية الرقمية</div>
+      <p class="svc-detail-desc">
+        العلامات التجارية القوية لا تعتمد على شعار فقط، بل على نظام بصري واستراتيجية واضحة. نبني لك هوية احترافية مدروسة تعزز حضورك في السوق وتزيد ثقة العملاء بعلامتك.
+      </p>
+
+      <div class="includes-label">ماذا تشمل الخدمة</div>
+      <ul class="includes-list">
+        <li>تصميم هوية بصرية كاملة (شعار – ألوان – خطوط – أنماط)</li>
+        <li>إعداد دليل استخدام الهوية Brand Guidelines</li>
+        <li>تصميم قوالب منشورات احترافية جاهزة للاستخدام</li>
+        <li>إعداد استراتيجية محتوى لشهر كامل</li>
+        <li>تحديد نبرة التواصل المناسبة لعلامتك</li>
+        <li>توجيه بصري لتطبيق الهوية على المتجر والسوشيال</li>
+      </ul>
+
+      <div class="svc-result">
+        <span class="svc-result-label">النتيجة</span>
+        <p>حضور بصري متكامل يعكس احترافية علامتك ويرسّخها في ذهن عميلك 💜</p>
+      </div>
+
+      <div class="suitable-label">SUITABLE FOR</div>
+      <div class="suitable-tags">
+        <span class="suitable-tag">علامات تجارية ناشئة</span>
+        <span class="suitable-tag">إعادة تموضع احترافي</span>
+        <span class="suitable-tag">متاجر فئة متوسطة–عالية</span>
       </div>
     </div>
-    <div class="pkg-footer">
-      <div><div class="pkg-price-label">يبدأ من</div><div class="pkg-price-val">8,000 <em>ريال</em></div></div>
-      <a href="https://wa.me/966592843956?text=وناسة! أبي أعرف أكثر عن باقة الإطلاق الكامل 🚀" class="wa-btn" target="_blank">
-        <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        اختر الباقة
+    <div class="svc-detail-footer">
+      <div>
+        <div class="price-label">يبدأ من</div>
+        <div class="price-val">2,500 <em>ريال</em></div>
+      </div>
+      <a href="https://wa.me/966592843956?text=هلا! أبي باقة الهوية البصرية والاستراتيجية الرقمية ✨" class="wa-btn" target="_blank">
+        <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        اطلب الآن
       </a>
     </div>
   </div>
 
-  <!-- INDIVIDUAL SERVICES -->
-  <div class="section-header" style="margin-top:44px;">
+  <!-- PRICE SUMMARY BOX -->
+  <div class="section-header" style="margin-top:36px;">
     <div class="section-dot" style="background:var(--accent);box-shadow:0 0 10px var(--accent);"></div>
-    <div class="section-title">خدمات مفردة</div>
+    <div class="section-title">ملخص الأسعار</div>
     <div class="section-line"></div>
   </div>
 
-  <div class="services-grid">
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:20px;">
+    <div style="padding:18px 20px 0;">
+      <div style="display:flex;flex-direction:column;gap:0;">
 
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🛒</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">متجر دروبشوبينق احترافي</div>
-        <div class="svc-desc">متجر جاهز للبيع بتجربة سلسة وبنية محترفة</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 4 أيام</div><div class="svc-price">442 ر</div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;">🛒</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text);">متجر احترافي جاهز للبيع</div>
+              <div style="font-size:10.5px;color:var(--muted);">سلة / زد / Shopify</div>
+            </div>
+          </div>
+          <div style="text-align:left;">
+            <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--pur-light);">1,800+</div>
+            <div style="font-size:10px;color:var(--muted);">ريال</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;">📈</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text);">تحسين معدل التحويل CRO</div>
+              <div style="font-size:10.5px;color:var(--muted);">للمتاجر القائمة</div>
+            </div>
+          </div>
+          <div style="text-align:left;">
+            <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--accent);">1,200+</div>
+            <div style="font-size:10px;color:var(--muted);">ريال</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;">✨</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text);">هوية بصرية + استراتيجية</div>
+              <div style="font-size:10.5px;color:var(--muted);">Brand Identity كاملة</div>
+            </div>
+          </div>
+          <div style="text-align:left;">
+            <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--pur-light);">2,500+</div>
+            <div style="font-size:10px;color:var(--muted);">ريال</div>
+          </div>
+        </div>
+
       </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة متجر دروبشوبينق 🛒" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
     </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🔲</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">باركود QR ذكي</div>
-        <div class="svc-desc">ربط عملاءك مباشرة بمنتجاتك بلمسة واحدة</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 10 ساعات</div><div class="svc-price">61 ر</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة باركود QR 🔲" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
+    <div style="background:var(--pur-dim);border-top:1px solid rgba(126,104,171,0.15);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-size:12px;color:var(--pur-pale);">💡 اجمع الخدمات لخصم خاص</div>
+      <a href="https://wa.me/966592843956?text=هلا! أبي أستفسر عن خصم الجمع بين الخدمات 💼" style="font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;">اسأل عن العرض ←</a>
     </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🏪</div><div class="svc-img-tag"><img 
-      src="https://cdn.experts.files.salla.network/cdn-cgi/image/width=300/uploads/ddNGvriQlyMQGsFbLoIHSvMCHZ03qRdnsEZiPCec.png" 
-      alt="متجر سلة بلس" 
-      style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"
-    ></div></div>
-      <div class="svc-body">
-        <div class="svc-name">متجر سلة - باقه بلس</div>
-        <div class="svc-desc">متجر رقمي متكامل على سلة بلس جاهز فوراً</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 7 أيام</div><div class="svc-price">442 ر</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة متجر سلة بلس 🏪" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">💎</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">متجر سلة - باقة PRO</div>
-        <div class="svc-desc">تصميم احترافي بخدمات إضافية على باقة برو</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 7 أيام</div><div class="svc-price">684+ ر</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة متجر سلة برو 💎" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">⚙️</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">تصميم CSS & JS</div>
-        <div class="svc-desc">تخصيص متجرك بالكامل وتحسين أدائه الجمالي</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 7 أيام</div><div class="svc-price">1,324+ ر</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة CSS وJS للمتجر ⚙️" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">💬</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">أيقونة واتساب للمتجر</div>
-        <div class="svc-desc">عملاءك يتواصلون معك بضغطة واحدة من المتجر</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 5 ساعات</div><div class="svc-price">28 ر</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة أيقونة واتساب 💬" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">📦</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">إضافة 15 منتج</div>
-        <div class="svc-desc">منتجاتك منظمة وجذابة جاهزة للبيع المباشر</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 4 أيام</div><div class="svc-price">224+ ر</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة إضافة 15 منتج 📦" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">📄</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">وثيقة المركز السعودي</div>
-        <div class="svc-desc">تأسيس أعمالك قانونياً بوثائق رسمية معتمدة</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 24 ساعة</div><div class="svc-price">109+ ر</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة وثيقة المركز السعودي 📄" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">📈</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">تحسين SEO – 5 مقالات</div>
-        <div class="svc-desc">ارفع ترتيبك في جوجل وزد ظهور منتجاتك</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 7 أيام</div><div class="svc-price">339+ ر</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة تحسين SEO 📈" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🎛️</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">إدارة المتجر شهر كامل</div>
-        <div class="svc-desc">إدارة شاملة لضمان نمو مبيعاتك بشكل مستمر</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 30 يوم</div><div class="svc-price">2,299+ ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة إدارة المتجر شهر 🎛️" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🗂️</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">أقسام وتصنيفات المتجر</div>
-        <div class="svc-desc">نظّم متجرك يخلي عميلك يلقى اللي يبيه بسهولة</div>
-        <div class="svc-meta"><div class="svc-time">⏱ يوم</div><div class="svc-price">28+ ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة أقسام المتجر 🗂️" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🪪</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">وثيقة العمل الحر</div>
-        <div class="svc-desc">افتح حسابك كمستقل للعمل أونلاين بسهولة</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 3 أيام</div><div class="svc-price">52 ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة وثيقة العمل الحر 🪪" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🏦</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">حساب بنكي تجاري</div>
-        <div class="svc-desc">سهّل عمليات البيع والدفع بحساب احترافي</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 24 ساعة</div><div class="svc-price">61 ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة الحساب البنكي التجاري 🏦" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">📱</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">منشورات سوشيال ميديا</div>
-        <div class="svc-desc">بوستات تصميم تزيد تفاعل جمهورك وتقوي البراند</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 4 أيام</div><div class="svc-price">64+ ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة منشورات سوشيال ميديا 📱" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">✍️</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">وصف منتجات SEO</div>
-        <div class="svc-desc">وصف يحسن ظهور منتجاتك ويحوّل الزيارات لمبيعات</div>
-        <div class="svc-meta"><div class="svc-time">⏱ يوم</div><div class="svc-price">23+ ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة وصف منتجات SEO ✍️" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🖼️</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">بانرين واجهة المتجر</div>
-        <div class="svc-desc">بانرات تعطي متجرك شكل يبهر من أول نظرة</div>
-        <div class="svc-meta"><div class="svc-time">⏱ يومين</div><div class="svc-price">46+ ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة بانرين المتجر 🖼️" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">🇸🇦</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">منشورات يوم التأسيس</div>
-        <div class="svc-desc">تصميمات وطنية احترافية للمناسبات السعودية</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 3 أيام</div><div class="svc-price">132+ ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة منشورات يوم التأسيس 🇸🇦" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
-    <div class="svc-card">
-      <div class="svc-img"><div class="svc-img-icon">✨</div><div class="svc-img-tag">📸 أضف صورة</div></div>
-      <div class="svc-body">
-        <div class="svc-name">تطوير وتحسين الشعار</div>
-        <div class="svc-desc">حسّن شعارك يصير أكثر احترافية وجاذبية وتميزاً</div>
-        <div class="svc-meta"><div class="svc-time">⏱ 9 أيام</div><div class="svc-price">972+ ريال</div></div>
-      </div>
-      <a href="https://wa.me/966592843956?text=هلا! أبي خدمة تحسين الشعار ✨" class="svc-wa-btn" target="_blank">📩 تواصل الآن</a>
-    </div>
-
   </div>
 
   <!-- CTA -->
   <div class="cta-section">
     <span class="cta-emoji">🤝</span>
     <div class="cta-title">مو متأكد وش تحتاج؟<br>اتواصل ونحدد سواً!</div>
-    <p class="cta-desc">أرسلنا مشروعك ونرسل لك الخطة المناسبة مجاناً — بدون أي التزام 🎁</p>
+    <p class="cta-desc">أرسلنا تفاصيل مشروعك ونرسل لك الخطة المناسبة مجاناً — بدون أي التزام 🎁</p>
     <a href="https://wa.me/966592843956?text=هلا عفاف سعود! أبي تساعدوني أختار الخدمة المناسبة 💼" class="wa-btn" target="_blank">
       <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       تواصل الآن مجاناً
